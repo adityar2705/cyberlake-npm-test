@@ -1,9 +1,8 @@
 import axios from 'axios';
 import fs from 'fs';
-//const cyberLink = "https://web-production-5ee8.up.railway.app";
+const cyberLink = "https://web-production-5ee8.up.railway.app";
 let currUser = null;
 import FormData from 'form-data';
-const cyberLink = "http://localhost:5001/npm";
 
 //function to check if user is configured
 function checkConfig(){
@@ -34,7 +33,8 @@ export const uploadFile = async(params) => {
         const fileData = fs.readFileSync(filePath);
         form.append('cyberlakeFile', fileData); 
         form.append('user',JSON.stringify(currUser));
-        form.append('passcode',params.passcode)
+        form.append('passcode',params.passcode);
+        form.append('fileName',params.fileName);
         const response = await axios.post(`${cyberLink}/upload`,{
             form
         },{
